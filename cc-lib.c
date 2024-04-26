@@ -2,7 +2,7 @@
 /*Version: CrazyCar-V1.39 */
 
 /* Anpassung
-22.07.15 rueckwaerts(){	if(OCR1B >= STOP) # >= sonst von f0 aus kein Rückwerts
+22.07.15 rueckwaerts(){	if(OCR1B >= STOP) # >= sonst von f0 aus kein RÃ¼ckwerts
 
 */
 
@@ -62,7 +62,7 @@ void testServo(void){
 
 /*		uart_puts(tab);
 		uart_puts(freeRAMText);
-		itoa(freeRam(),texth,10);  			// Verbrach von SRAM prüfen
+		itoa(freeRam(),texth,10);  			// Verbrach von SRAM prÃ¼fen
 		strcat(texth,tab);
 		uart_puts(texth);
 		uart_putc('\r');
@@ -111,7 +111,7 @@ void initFahr(uint8_t max){  //Festlegung der max Geschwindigkeit
 	maxFahr = max;
 }
 
-void fahr(int16_t fwert ){  //fwert im gültigen Bereich? 
+void fahr(int16_t fwert ){  //fwert im gÃ¼ltigen Bereich? 
 	//MAXRUEWAERTS=400, MAXVORWAERTS=1000, STOP=700
 	if ((fwert < 18) && (fwert > -18)) OCR1B = STOP;
 	else	if ((fwert >= 0) && (fwert <=  maxFahr)) OCR1B = STOP + 3*fwert;
@@ -141,11 +141,11 @@ int8_t getFahr(void){ return getFahrPrivate(OCR1B); }
 int8_t getFahrM(int16_t wert_OCR1B){ return getFahrPrivate(wert_OCR1B); }
 
 void rueckwaerts(int16_t wert){
-	if(OCR1B >= STOP){	// fährt das Fahrzeug vorwaerts?
+	if(OCR1B >= STOP){	// fÃ¤hrt das Fahrzeug vorwaerts?
 		OCR1B = 600;	//Ja, zeige Rueckwaertsfahren an
-		warte_ms(100);	//warte ms
+		warte_ms(150);	//warte ms // FÃ¼r den neuen Fahrtenregler TBLE-04S musste dieser Wert von 100 ms auf 150 ms angehoben werden.
 		OCR1B = 700;	//Stop
-		warte_ms(100);	//warte ms
+		warte_ms(150);	//warte ms // FÃ¼r den neuen Fahrtenregler TBLE-04S musste dieser Wert von 100 ms auf 150 ms angehoben werden.
 	}
 	OCR1B=wert;	// angegebene Geschwindigkeit einstellen
 }
