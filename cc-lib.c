@@ -19,6 +19,9 @@
 #include "df.h"
 #include "cc-lib.h"
 
+uint8_t gebremst = 0;
+uint8_t rueckwaertsgefahren = 0;
+
 void testServo(void){
 
 	const char servoText[]="Nur + / - : ";
@@ -114,10 +117,41 @@ void initFahr(uint8_t max){  //Festlegung der max Geschwindigkeit
 void fahr(int16_t fwert ){  //fwert im gültigen Bereich? 
 	//MAXRUEWAERTS=400, MAXVORWAERTS=1000, STOP=700
 	if ((fwert < 12) && (fwert > -12)) OCR1B = STOP; //Minimale Geschwindigkeit wurde auf 12 reduziert.
-	else	if ((fwert >= 0) && (fwert <=  maxFahr)) OCR1B = STOP + 3*fwert;
-	else  if ((fwert <  0) && (fwert >= -maxFahr))	rueckwaerts(STOP + 3*fwert);
+	else	if ((fwert >= 0) && (fwert <=  maxFahr)) {
+		OCR1B = STOP + 3*fwert;
+		rueckwaertsgefahren = 0;
+	}
+	else  if ((fwert <  0) && (fwert >= -maxFahr))	{
+		rueckwaerts(STOP + 3*fwert);
+		rueckwaertsgefahren = 1;
+	}
 	else ; //fahre weiter im der alten  Geschwindigkeit
 }	
+
+void bremse(int16_t fwert ){  //fwert im gültigen Bereich? 
+	//MAXRUEWAERTS=400, MAXVORWAERTS=1000, STOP=700
+	if ((fwert < 12) && (fwert > -12)) {
+		OCR1B = STOP;
+		rueckwaertsgefahren = 1;
+	} 
+	else	if ((fwert >= 0) && (fwert <=  maxFahr)) {
+		if (1 == rueckwaertsgefahren){
+			OCR1B = STOP;
+		} else {
+			OCR1B = STOP + (-3)*fwert; 
+			gebremst = 1;
+		}
+	}
+	else  if ((fwert <  0) && (fwert >= -maxFahr))	{
+		if (1 == rueckwaertsgefahren){
+			OCR1B = STOP;
+		} else {
+			OCR1B = STOP + 3*fwert; 
+			gebremst = 1;
+		}
+	}
+	else ; //fahre weiter im der alten  Geschwindigkeit
+}
 
 int8_t getServoPrivate(int16_t wertOCR1A){
 	//Umsetzung von -10 bis +10 auf Servoparameter
@@ -141,11 +175,12 @@ int8_t getFahr(void){ return getFahrPrivate(OCR1B); }
 int8_t getFahrM(int16_t wert_OCR1B){ return getFahrPrivate(wert_OCR1B); }
 
 void rueckwaerts(int16_t wert){
-	if(OCR1B >= STOP){	// fährt das Fahrzeug vorwaerts?
+	if((OCR1B >= STOP) || (1 == gebremst)){	// fährt das Fahrzeug vorwaerts?
 		OCR1B = 600;	//Ja, zeige Rueckwaertsfahren an
 		warte_ms(150);	//warte ms // Für den neuen Fahrtenregler TBLE-04S musste dieser Wert von 100 ms auf 150 ms angehoben werden.
 		OCR1B = 700;	//Stop
 		warte_ms(150);	//warte ms // Für den neuen Fahrtenregler TBLE-04S musste dieser Wert von 100 ms auf 150 ms angehoben werden.
+		gebremst = 0;
 	}
 	OCR1B=wert;	// angegebene Geschwindigkeit einstellen
 }
