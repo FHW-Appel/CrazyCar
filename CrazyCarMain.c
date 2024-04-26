@@ -20,9 +20,12 @@
 #include "myFunktions.h"
 #include "cc-lib.h"
 
+void initLEDs(void);
+
 int main (void)
 {
 	initMikroController();     //Initialisierung des Mikrocontrollers
+	initLEDs();
 	//while(1) { testServo(); }//<== Initialisierung  Servo, 1X <==========
 
 	initServo(920, 776, 600);  //<== Volllinks, Gerade, Vollrechts eintragen, Servo, 1X <==========
@@ -35,7 +38,7 @@ int main (void)
    mod = s1() +  2*s2(); //0=Terminalbetrieb, 1=fahren1(), 2=fahren2(), 3=fahren3()
 
 	if( s4() == 1 ){				// Datenspeichern und Fahrzeug anhalten nach x Sekunden
-		ledPB1(1);					//LED PB1 an
+		// ledPB1(1);					//LED PB1 an
 		historyDepthPointer=0; 	//neue Datenaufzeichung
 		hspStart=1;					// beginne Speicherung bein naechsten Block
 	}
@@ -90,30 +93,37 @@ int main (void)
 	return (0);
 }//endmain
 
+void initLEDs(void) {
+	// LEDs auf LOW setzen.
+	ledPB1(0);
+	ledPB1(0);
+	ledPC2(0);
+	ledPC3(0);
+}
 
 void autonomFahren(void){
 
 	//mod =  Schalterauswertung von s1() und s2() (kann mit einem Kommando überschrieben werden)
 	switch(mod){
-		case	0:  	ledPC3(0); ledPC2(0); //nur Terminal Ein- u. Ausgabe
+		case	0:  	// ledPC3(0); ledPC2(0); //nur Terminal Ein- u. Ausgabe
 						break;
 
-		case	1:  	ledPC3(1); ledPC2(0); //Fahrzeug faehrt via Software
+		case	1:  	// ledPC3(1); ledPC2(0); //Fahrzeug faehrt via Software
 						fahren1();
 						break;
 
-		case	2:  	ledPC3(0); ledPC2(1); //Fahrzeug faehrt via Software
+		case	2:  	// ledPC3(0); ledPC2(1); //Fahrzeug faehrt via Software
 						fahren2();
 						break;
 
-		case	9:  	ledPC2_flash(100); ledPC3_flash(100,0);	 //Fahrzeug Stopp
+		case	9:  	// ledPC2_flash(100); ledPC3_flash(100,0);	 //Fahrzeug Stopp
 						fahr(0);
 						hspStart=0;					//keine Datenaufzeichung ins EEPROM						
 						abtastzeitMAX=0;			//Zyklusmessung zurücksetzen
 						historyDepthPointer=0; 	//neue Datenaufzeichung
 						break;
 
-		default: 	ledPC2_flash(30); ledPC3_flash(30,1); // nichts definiert
+		default: 		// ledPC2_flash(30); ledPC3_flash(30,1); // nichts definiert
 						break;
 	}
 }
