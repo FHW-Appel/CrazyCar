@@ -1,4 +1,4 @@
-/*Werner Jessen + Dieter Rathmann */
+/*Werner Jessen + Dieter Rathmann  Haha hier muss ein Konflikt kommen*/
 /*Version: CrazyCar-V1.39 */
 /*Prüfung der AkkuSpannung, neue USB-Ausgabe, ledSchalterTest() */
 /* nicht mehr benötigte Programmteile entfernt */
@@ -102,7 +102,7 @@ int main (void)
 void initLEDs(void) {
 	// LEDs auf LOW setzen.
 	ledPB1(0);
-	ledPB1(0);
+	ledPB2(0);
 	ledPC2(0);
 	ledPC3(0);
 }
