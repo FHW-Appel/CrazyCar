@@ -92,7 +92,7 @@ int main (void)
 void initLEDs(void) {
 	// LEDs auf LOW setzen.
 	ledPB1(0);
-	ledPB1(0);
+	ledPB2(0);
 	ledPC2(0);
 	ledPC3(0);
 }
