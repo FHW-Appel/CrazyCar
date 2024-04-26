@@ -30,7 +30,7 @@ uint8_t logMod=0, hisDepth=HISTORYDEPTH;
 uint8_t ausgabefaktor=2; // wenn 1 u. MwWerte=10 dann alle 500ms Ausgabe mit log
 int	kommand = 0;		// 1 wenn neues Kommando eingegeben wurde
 
-const char welcome[]="CC V1.39 ";
+const char welcome[]="CC v2.0.0";
 const char freeRAMText[]="freeRAM";
 const char abtastzeitMAXText[]="ZzMax";
 const char akkuText[]="Akku";

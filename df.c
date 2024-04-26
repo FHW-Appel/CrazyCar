@@ -1,7 +1,3 @@
-/*Werner Jessen + Dieter Rathmann */
-/*Version: CrazyCar-V1.39 */
-/* 25.09.2018 */
-
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <stdlib.h>

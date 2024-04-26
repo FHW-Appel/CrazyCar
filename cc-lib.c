@@ -1,6 +1,3 @@
-/*Werner Jessen + Dieter Rathmann */
-/*Version: CrazyCar-V1.39 */
-
 /* Anpassung
 22.07.15 rueckwaerts(){	if(OCR1B >= STOP) # >= sonst von f0 aus kein Rückwerts
 
