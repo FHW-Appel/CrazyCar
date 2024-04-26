@@ -113,7 +113,7 @@ void initFahr(uint8_t max){  //Festlegung der max Geschwindigkeit
 
 void fahr(int16_t fwert ){  //fwert im gültigen Bereich? 
 	//MAXRUEWAERTS=400, MAXVORWAERTS=1000, STOP=700
-	if ((fwert < 18) && (fwert > -18)) OCR1B = STOP;
+	if ((fwert < 12) && (fwert > -12)) OCR1B = STOP; //Minimale Geschwindigkeit wurde auf 12 reduziert.
 	else	if ((fwert >= 0) && (fwert <=  maxFahr)) OCR1B = STOP + 3*fwert;
 	else  if ((fwert <  0) && (fwert >= -maxFahr))	rueckwaerts(STOP + 3*fwert);
 	else ; //fahre weiter im der alten  Geschwindigkeit
