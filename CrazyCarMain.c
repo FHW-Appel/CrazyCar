@@ -44,19 +44,19 @@ int main (void)
 	while(1) {
 
 	//Sensordaten einlesen
-		analogwertL=adc(0);			// lese Sensor links
-		analogwertR=adc(1);			// lese Sensor rechts
-		analogwertV=adc(2);			// lese Sensor vorne
+		messwertL=adc(0);			// lese Sensor links
+		messwertR=adc(1);			// lese Sensor rechts
+		messwertV=adc(2);			// lese Sensor vorne
 	//	analogwertI=adc(3);			// Sensor Strom
 	//	analogwertU=adc(4);			// Sensor Spannung
-		analogwertAkku=adc(7);		// lese AkkuSpannung
+		messwertAkku=adc(7);		// lese AkkuSpannung
 
 //hier erfolgt die Umrechnung der digitalen Abstandswerte
 // in den Abstandswert in cm (abstandlinks,abstandrechts,abstandvorne)
 // SensorWinkel... als globale Vatiable in global.h definiert
-		abstandlinks  = linearisierungAD(analogwertL, SensorWinkelLinks); //<== Eigene Funktion schreiben
-		abstandrechts = linearisierungAD(analogwertR, SensorWinkelRechts); //analogwert, cosinusAlpha*100
-		abstandvorne  = linearisierungAD(analogwertV, SensorWinkelGeradeaus);
+		abstandlinks  = linearisierungAD(messwertL, SensorWinkelLinks); //<== Eigene Funktion schreiben
+		abstandrechts = linearisierungAD(messwertR, SensorWinkelRechts); //analogwert, cosinusAlpha*100
+		abstandvorne  = linearisierungAD(messwertV, SensorWinkelGeradeaus);
 //		akkuSpannungPruefen(mya);  	// Ist die AkkuSpannung unter dem Grenzwert?
 
 //konstante zeitliche Abarbeitung des Steuerzyklusses

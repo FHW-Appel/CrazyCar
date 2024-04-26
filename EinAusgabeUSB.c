@@ -267,7 +267,7 @@ void ausgabeUSB2(void){
 				case 27: if (logMod & 0x08) uart_puts("rechts\t");	break;
 				case 30: if (logMod & 0x10) uart_puts("Servo\t"); break;
 				case 33: if (logMod & 0x20) uart_puts("Fahr\t");  break;
-				case 35: if (analogwertAkku < AKKUGRENZWERT){ 
+				case 35: if (messwertAkku < AKKUGRENZWERT){ 
 								uart_puts(akkuText); uart_puts("\t");
 							}	 												break;
 				//case 39: if (logMod & 0x40) uart_puts("Mod\t");	break;
@@ -345,8 +345,8 @@ void ausgabeUSB2(void){
 				strcat(texth,tab);
 				uart_puts(texth);
 			}
-			if (analogwertAkku < AKKUGRENZWERT){	
-				itoa(analogwertAkku,texth,10);  // Akku, analog			 
+			if (messwertAkku < AKKUGRENZWERT){	
+				itoa(messwertAkku,texth,10);  // Akku, analog			 
 				strcat(texth,tab);
 				uart_puts(texth);	
 			}
@@ -496,7 +496,7 @@ void ausgabeUSBlogoff(void){
 			switch(datenSatzZaehler % (100)){
 				case 3: 	uart_puts(tab);										break;
 				case 5:  uart_puts(akkuText); uart_puts(gleichText);	break;
-				case 7:  itoa(analogwertAkku,texth,10);					
+				case 7:  itoa(messwertAkku,texth,10);					
 							uart_puts(texth); uart_puts(tab);				break;
 				case 9:  uart_puts(modTEXT); uart_puts(gleichText);	break;			
 				case 11: itoa(mod,texth,10);					

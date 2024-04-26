@@ -115,9 +115,9 @@ int8_t s4(void) {
 void mittelWerteBerechnen(void){ 
 
 	//Aufsummieren der Analogwerte
-	historyAverageL = historyAverageL + analogwertL;
-	historyAverageR = historyAverageR + analogwertR;
-	historyAverageV = historyAverageV + analogwertV;
+	historyAverageL = historyAverageL + messwertL;
+	historyAverageR = historyAverageR + messwertR;
+	historyAverageV = historyAverageV + messwertV;
 	historyAverageS  = historyAverageS  + OCR1A;
 	historyAverageFR = historyAverageFR + OCR1B;
 

@@ -8,7 +8,7 @@ uint16_t  abtastzeit=0,abtastzeitMAX=0,abtastzeitZyklus=0;
 
 //  Globale Variable
 uint16_t abstandlinks,abstandrechts,abstandvorne;
-uint16_t analogwertL,analogwertR,analogwertV,analogwertAkku;
+uint16_t messwertL,messwertR,messwertV,messwertAkku;
 
 uint16_t  OutL=0,OutR=0,OutV=0, OutS=0,OutFR=0;
 uint16_t  OutHL=0,OutHR=0,OutHV=0, OutHS=0,OutHFR=0;

@@ -35,7 +35,7 @@ void uebung3(void){
 
 }
 
-uint16_t  linearisierungAD(uint16_t analogwert, uint8_t cosAlpha){
+uint16_t  linearisierungAD(uint16_t messwert, uint8_t cosAlpha){
 		//Die Funktion linearisiert den Analogwert mittels einer Hyperbel 2. Ordnung
 		//Bei schräger Projektion auf ein Wand kann der reale Abstand
 		// durch ein Multiplikation mit dem cosinusAlpha bestimmt werden.
