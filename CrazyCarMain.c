@@ -1,13 +1,3 @@
-/*Werner Jessen + Dieter Rathmann  Haha hier muss ein Konflikt kommen*/
-/*Version: CrazyCar-V1.39 */
-/*Prüfung der AkkuSpannung, neue USB-Ausgabe, ledSchalterTest() */
-/* nicht mehr benötigte Programmteile entfernt */
-/* Historie wird in EERAM geschrieben, neue Kommandos */
-/* Mako's fuer Outputs, FR+Servo */
-/* Augabe individueller Daten mit (int16_t) h1,h2,h3 incl. Mittelwertbildung 
-	Einschleusung von Daten via Kommando mya, myb, myc an die 
-	Variable (int16_t) myInt1,myInt2, myInt3 , zB. mya65 myInt1=65 */
-
 #include <avr/io.h>
 
 #include "global.h"
@@ -63,11 +53,11 @@ int main (void)
 
 
 //konstante zeitliche Abarbeitung des Steuerzyklusses
-//Abtastzeit wird im Hintergrund mit Timerinterrupt erhöht 
+//Abtastzeit wird im Hintergrund mit Timerinterrupt erhÃ¶ht 
 //ABTASTZEIT ist in gobal.h definiert, siehe zyklus.c
 		if (abtastzeit>=ABTASTZEIT)
 		{
-			abtastzeit=0;             		//abtastzeit auf 0 zurücksetzen
+			abtastzeit=0;             		//abtastzeit auf 0 zurÃ¼cksetzen
 			datenSatzZaehler++;				// Anzahl der digitalisierten Analogwerte, pro Runde +1
 			
 			ledSchalterTest();				//<== Eigene Funktion schreiben in myFunktions.c
@@ -109,7 +99,7 @@ void initLEDs(void) {
 
 void autonomFahren(void){
 
-	//mod =  Schalterauswertung von s1() und s2() (kann mit einem Kommando überschrieben werden)
+	//mod =  Schalterauswertung von s1() und s2() (kann mit einem Kommando Ã¼berschrieben werden)
 	switch(mod){
 		case	0:  	// ledPC3(0); ledPC2(0); //nur Terminal Ein- u. Ausgabe
 						break;
@@ -125,7 +115,7 @@ void autonomFahren(void){
 		case	9:  	// ledPC2_flash(100); ledPC3_flash(100,0);	 //Fahrzeug Stopp
 						fahr(0);
 						hspStart=0;					//keine Datenaufzeichung ins EEPROM						
-						abtastzeitMAX=0;			//Zyklusmessung zurücksetzen
+						abtastzeitMAX=0;			//Zyklusmessung zurÃ¼cksetzen
 						historyDepthPointer=0; 	//neue Datenaufzeichung
 						break;
 

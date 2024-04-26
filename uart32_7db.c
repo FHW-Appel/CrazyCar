@@ -1,11 +1,4 @@
 /*************************************************************************
-Title:    Interrupt USART library with receive/transmit circular buffers
-Author:   
-File:     $Id: uart.c,v 1.0 2006/05/23 19:59:12 $
-Software: AVR-GCC 3.3 
-Hardware: any AVR with built-in USART, 
-          tested on ATmega32 at 8Mhz
-
 DESCRIPTION:
     An interrupt is generated when the USART has finished transmitting or
     receiving a byte. The interrupt handling routines use circular buffers
