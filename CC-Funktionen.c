@@ -1,12 +1,3 @@
-
-/************************************************************************
-Title:    Crazy Car Funktionen
-Author:   D. Rathmann
-File:     V1.39 2018/05/11
-Software: AVR-GCC
-Hardware: any AVR ,tested on ATmega32
-Usage:
-************************************************************************/
 1: ist zu vervollständigen, eigner Code ist zu entwickeln
 2: ist fertig und funktioniert
 

@@ -3,14 +3,6 @@
 #define MWERTE	10				// 10 Werte = 100ms
 //#define HISTORYDEPTH 60	   //max 30, sonst Fehler, jetzt in global.h
 
-/********************************************************
-Title:    CrazyCar Funktionen
-Author:   Schuelergruppe GHO1/RBZ1/WHG1
-File:     df.h, V1.39 1 $
-Software: AVR-GCC
-Hardware: any AVR ,tested on ATmega32
-Usage:
-*********************************************************/
 extern uint16_t datenSatzZaehler;
 extern uint16_t historyAverageL,historyAverageR,historyAverageV;
 extern uint16_t historyAverageS,historyAverageFR;

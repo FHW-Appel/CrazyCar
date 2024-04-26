@@ -1,12 +1,3 @@
-/************************************************************************
-Title:    Crazy Car Variable und Funktionen
-Author:   D. Rathmann
-File:     V1.39 2018/15/10 1
-Software: AVR-GCC
-Hardware: any AVR ,tested on ATmega32
-Usage:
-************************************************************************/
-
 
 - int16_t mya, myb, myc; // Terminal-ImportHilfsVariable 
 - int16_t ausgabe1, ausgabe2, ausgabe3; char ausgabeT[] //Zur Ausgabe eigener Daten im Terminal

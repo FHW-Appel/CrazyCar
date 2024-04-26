@@ -1,15 +1,6 @@
 #ifndef _MYFUNKIONS_H_
 #define _MYFUNKIONS_H_
 
-/************************************************************************
-Title:    Crazy Car Funktionen
-Author:   Schuelergruppe GHO/RBZ/WHG
-File:     myFunktions.h, V1.39 2018/11/06 1 $
-Software: AVR-GCC
-Hardware: any AVR ,tested on ATmega32
-Usage:
-************************************************************************/
-
 // Funktionsprototypen
 void fahren1(void);
 void fahren2(void);

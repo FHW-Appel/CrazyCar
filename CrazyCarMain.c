@@ -1,13 +1,3 @@
-/*Werner Jessen + Dieter Rathmann */
-/*Version: CrazyCar-V1.39 */
-/*Prüfung der AkkuSpannung, neue USB-Ausgabe, ledSchalterTest() */
-/* nicht mehr benötigte Programmteile entfernt */
-/* Historie wird in EERAM geschrieben, neue Kommandos */
-/* Mako's fuer Outputs, FR+Servo */
-/* Augabe individueller Daten mit (int16_t) h1,h2,h3 incl. Mittelwertbildung 
-	Einschleusung von Daten via Kommando mya, myb, myc an die 
-	Variable (int16_t) myInt1,myInt2, myInt3 , zB. mya65 myInt1=65 */
-
 #include <avr/io.h>
 
 #include "global.h"

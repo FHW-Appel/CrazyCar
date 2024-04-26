@@ -1,13 +1,6 @@
 #ifndef USART_H
 #define USART_H
-/************************************************************************
-Title:    Interrupt USART library with receive/transmit circular buffers
-Author:   
-File:     $Id: uart.h,v 1.0 2006/05/23 11:25:41 $
-Software: AVR-GCC 3.3
-Hardware: any AVR with built-in USART, tested on ATmega32 at 8 Mhz
-Usage:    
-************************************************************************/
+
 
 /** 
  *  @defgroup pfleury_uart USART Library
