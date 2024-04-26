@@ -1,0 +1,14 @@
+# ignore "obj" folder
+obj/
+
+# ingore "dep" folder
+dep/
+
+# ignore compiled files
+*.hex
+*.eep
+*.cof
+*.elf
+*.map
+*.sym
+*.lss

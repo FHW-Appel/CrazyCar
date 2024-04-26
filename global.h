@@ -44,8 +44,8 @@
 extern uint16_t  abtastzeit,abtastzeitMAX,abtastzeitZyklus;
 
 //  Globale Variable
-extern uint16_t abstandlinks,abstandrechts,abstandvorne,analogwertAkku;
-extern uint16_t analogwertL,analogwertR,analogwertV;
+extern uint16_t abstandlinks,abstandrechts,abstandvorne,messwertAkku;
+extern uint16_t messwertL,messwertR,messwertV;
 //extern uint16_t analogwertEx;
 
 extern uint16_t  OutL,OutR,OutV,OutS,OutFR;;
