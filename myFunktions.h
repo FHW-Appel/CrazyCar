@@ -18,7 +18,7 @@ void uebung1(void);
 void uebung2(void);
 void uebung3(void);
 
-uint16_t  linearisierungAD(uint16_t analogwert, uint8_t cosAlpha);
+uint16_t  linearisierungAD(uint16_t messwert, uint8_t cosAlpha);
 void akkuSpannungPruefen(uint16_t);
 void ledSchalterTest(void);
 int16_t ro(void);
