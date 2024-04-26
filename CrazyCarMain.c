@@ -57,7 +57,7 @@ int main (void)
 		abstandlinks  = linearisierungAD(messwertL, SensorWinkelLinks); //<== Eigene Funktion schreiben
 		abstandrechts = linearisierungAD(messwertR, SensorWinkelRechts); //analogwert, cosinusAlpha*100
 		abstandvorne  = linearisierungAD(messwertV, SensorWinkelGeradeaus);
-//		akkuSpannungPruefen(mya);  	// Ist die AkkuSpannung unter dem Grenzwert?
+
 
 //konstante zeitliche Abarbeitung des Steuerzyklusses
 //Abtastzeit wird im Hintergrund mit Timerinterrupt erhöht 
@@ -71,8 +71,14 @@ int main (void)
 			uebung1();							// ausprobieren von Variablen und Funktionen	in myFunktions.c
 			uebung2();
 			uebung3();
-
-//			autonomFahren();					// eigene Funktion in myFunktions.c: fahren1(), fahren2(), ...
+			
+			if (messwertAkku>700){
+				//autonomFahren();					// eigene Funktion in myFunktions.c: fahren1(), fahren2(), ...
+			} else {
+				fahr(0); // Halte das Fahrzeug an
+				ledPC2_flash(100); ledPC3_flash(100,0); //Warnblinker an
+				ledPB2_flash(100); ledPB1_flash(100); //Warnblinker an
+			}
 
 			//Wenn s4 gesetzt ist oder Kommando hs, dann fahre solange bis der Datenspeicher voll ist.
 			//Dient zur Auswertung der Strecke (Optimierung)

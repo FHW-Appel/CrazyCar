@@ -80,11 +80,7 @@ int16_t pReglerServoRechts(void){
 }
 */
 
-void akkuSpannungPruefen(uint16_t schwellWert){
-//Prüfe die AkkuSpannung nur wenn das CrazyCar nicht fährt! 
-// Alle LEDs blicken, wenn Akku-Spannung < schwellwert !!
 
-}
 
 void ledSchalterTest(void){
 
