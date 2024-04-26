@@ -143,9 +143,9 @@ int8_t getFahrM(int16_t wert_OCR1B){ return getFahrPrivate(wert_OCR1B); }
 void rueckwaerts(int16_t wert){
 	if(OCR1B >= STOP){	// fährt das Fahrzeug vorwaerts?
 		OCR1B = 600;	//Ja, zeige Rueckwaertsfahren an
-		warte_ms(150);	//warte ms // Für den neuen Fahrtenregler TBLE-04S musste dieser Wert von 100 ms auf 150 ms angehoben werden. // not tested
+		warte_ms(150);	//warte ms // Für den neuen Fahrtenregler TBLE-04S musste dieser Wert von 100 ms auf 150 ms angehoben werden.
 		OCR1B = 700;	//Stop
-		warte_ms(150);	//warte ms // Für den neuen Fahrtenregler TBLE-04S musste dieser Wert von 100 ms auf 150 ms angehoben werden. // not tested
+		warte_ms(150);	//warte ms // Für den neuen Fahrtenregler TBLE-04S musste dieser Wert von 100 ms auf 150 ms angehoben werden.
 	}
 	OCR1B=wert;	// angegebene Geschwindigkeit einstellen
 }
