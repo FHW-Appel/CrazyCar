@@ -3,7 +3,7 @@ Im Projekt Crazy Car können Jugendliche Kreativität mit Spaß und Technik verb
 # Teilnehmen können Schulklassen oder Arbeitsgemeinschaften, die jeweils in vierköpfigen Teams aufgeteilt werden.
 
 Folgende Herausforderungen sind zu bewältigen:
-* __Mechanik:__ Aufbau einen Modellautos mit über hundert einzelteilen inklusive Differentialgetriebe und Lenkgestänge.
+* __Mechanik:__ Aufbau einen Modellautos mit über hundert Einzelteilen inklusive Differentialgetriebe und Lenkgestänge.
 * __Elektronik:__ Löten, Vermessen und Inbetriebnahme der Steuerungsplatine.
 * __Programmierung:__ Programmierung zu einem autonomen Fahrzeug.
 * __Design:__ Umbau des Fahrzeuges zu einem einzigartigen wie funktionalen Design.
