@@ -17,7 +17,7 @@ Lehrmaterial und Anleitungen werden im eigenen [Wiki](https://github.com/FHW-App
 ### Mechanik: 
 ![mechanik](resource/mechanik.jpg)
 
-Aufbau einen Modellautos mit über hundert Einzelteilen inklusive Differentialgetriebe und Lenkgestänge.
+Aufbau eines Modellautos mit über hundert Einzelteilen inklusive Differentialgetriebe und Lenkgestänge.
 
 ### Elektronik: 
 ![solder1](resource/solder1.jpg)
