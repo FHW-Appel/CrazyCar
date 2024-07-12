@@ -13,6 +13,8 @@ Wir starten das Projekt jährlich im September und begleiten Euch bei der Entwic
 
 Lehrmaterial und Anleitungen werden im eigenen [Wiki](https://github.com/FHW-Appel/CrazyCar/wiki) bereitgestellt.
 
+Der folgend Link beinhaltet ein Vorschlag für ein schulinternes [Fachcurriculum](https://github.com/FHW-Appel/CrazyCar/wiki/Vorschlag-schulinternes-Fachcurriculum). Dieses kann gerne verwendet werden.
+
 ## Folgende Herausforderungen sind zu bewältigen:
 ### Mechanik: 
 ![mechanik](resource/mechanik.jpg)
