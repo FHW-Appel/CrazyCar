@@ -9,7 +9,7 @@ Im Sommer jeden Jahres findet ein CrazyCar-Cup statt, bei dem die Teams in den D
 ![race1](resource/race1.jpg)
 
 # Teilnehmen können Schulklassen, die jeweils in vierköpfigen Teams aufgeteilt werden.
-Wir starten das Projekt jährlich im September und begleiten Euch bei der Entwicklung durch das Schuljahr. 
+Wir starten das Projekt jährlich im September und begleiten Euch bei der Entwicklung durch das Schuljahr. Das Angebot ist für Schulen im Schuljahr 2024/2025 kostenlos.
 
 Lehrmaterial und Anleitungen werden im eigenen [Wiki](https://github.com/FHW-Appel/CrazyCar/wiki) bereitgestellt.
 
@@ -43,4 +43,4 @@ Organisation und Koordination der Teamaufgaben.
 
 
 > [!NOTE]
-> Bei den gezeigten Bildern handelt es sich um KI-generiertes Bildmaterial. Um die persönlichkeitsrechte der teilnehmenden Schüler und Schülerinnen zu waren, werden auf dieser Webseite keine Fotos von Schülern und Schülerinnen veröffentlicht.
+> Bei den gezeigten Bildern handelt es sich um KI-generiertes Bildmaterial. Um die Persönlichkeitsrechte der teilnehmenden Schüler und Schülerinnen zu wahren, werden auf dieser Webseite keine Fotos von Schülern und Schülerinnen veröffentlicht.
