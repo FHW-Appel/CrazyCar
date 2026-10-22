@@ -3,6 +3,8 @@ obj/
 
 # ingore "dep" folder
 dep/
+# Ignore .dep folder on Ubuntu
+.dep/
 
 # ignore compiled files
 *.hex
