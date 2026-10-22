@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Kompiliere Firmware",
+            "type": "shell",
+            "command": "make",
+            "args": ["-C", "${workspaceFolder}/Quellcode", "all"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Clean Build-Artifakte",
+            "type": "shell",
+            "command": "make",
+            "args": ["-C", "${workspaceFolder}/Quellcode", "clean"],
+            "group": {
+                "kind": "build", 
+                "isDefault": true
+            }
+        },
+              {
+            "label": "Flash Firmware auf AVR",
+            "type": "shell",
+            "command": "make",
+            "args": ["-C", "${workspaceFolder}/Quellcode", "program"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
