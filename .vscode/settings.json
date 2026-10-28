@@ -1,0 +1,6 @@
+{
+    "task.autoDetect": "off",
+    "editor.inlineSuggest.enabled": false,
+    "chat.disableAIFeatures": true,
+    "extensions.ignoreRecommendations": true
+}
