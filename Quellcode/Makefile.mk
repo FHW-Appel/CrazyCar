@@ -1,6 +1,6 @@
 # Hey Emacs, this is a -*- makefile -*-
 #----------------------------------------------------------------------------
-# WinAVR Makefile Template written by Eric B. Weddington, J�rg Wunsch, et al.
+# WinAVR Makefile Template written by Eric B. Weddington, Jörg Wunsch, et al.
 #
 # Released to the Public Domain
 #
@@ -265,7 +265,7 @@ LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 # to get a full listing.
 #
 #AVRDUDE_PROGRAMMER = usbasp
-AVRDUDE_PROGRAMMER = stk500v1
+#AVRDUDE_PROGRAMMER = stk500v1
 
 # com1 = serial port. Use lpt1 to connect to parallel port.
 #AVRDUDE_PORT = usb
@@ -274,6 +274,7 @@ AVRDUDE_PROGRAMMER = stk500v1
 
 AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 #AVRDUDE_WRITE_EEPROM = -U eeprom:w:$(TARGET).eep
+AVRDUDE_BURN_FUSES = -U lfuse:w:0xE4:m -U hfuse:w:0xD9:m
 
 
 #C:\Programme\winavr\bin\avrdude.exe -p ATmega8 -e -c avr910
@@ -383,7 +384,7 @@ LST = $(SRC:%.c=$(OBJDIR)/%.lst) $(CPPSRC:%.cpp=$(OBJDIR)/%.lst) $(ASRC:%.S=$(OB
 
 
 # Compiler flags to generate dependency files.
-GENDEPFLAGS = -MMD -MP -MF .dep/$(@F).d
+GENDEPFLAGS = -MMD -MP -MF dep/$(@F).d
 
 
 # Combine all necessary flags and optional flags.
@@ -445,15 +446,23 @@ gccversion :
 	@$(CC) --version
 
 
-
-program: $(TARGET).hex $(TARGET).eep
-	@echo "Flashing AVR ..."
-	@SERIAL_PORT=$$(../.vscode/find_serial_port.sh); \
-	if [ -z "$$SERIAL_PORT" ]; then \
+find-serial-port:
+	@PORT="$(AVRDUDE_PORT)"; \
+	if [ -z "$$PORT" ]; then \
 		echo "Error: Es konnte kein serieller Port gefunden werden. Bitte prüfen Sie die Verbindung zu Ihrem Programmer."; \
 		exit 1; \
 	fi; \
-	$(AVRDUDE) -P $$SERIAL_PORT $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
+	echo "Serieller Port gefunden: $$PORT"
+
+
+program: find-serial-port $(TARGET).hex $(TARGET).eep
+	@echo "Flashing AVR ..."
+	$(AVRDUDE) -P $(AVRDUDE_PORT) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
+
+
+fuses: find-serial-port
+	$(AVRDUDE) -c $(AVRDUDE_PROGRAMMER) -p $(MCU) -P $(AVRDUDE_PORT) $(AVRDUDE_BURN_FUSES)
+
 
 # Generate avr-gdb config/init file which does the following:
 #     define the reset signal, load the target file, connect to target, and set 
@@ -606,7 +615,7 @@ clean_list :
 	$(REMOVE) $(SRC:.c=.s)
 	$(REMOVE) $(SRC:.c=.d)
 	$(REMOVE) $(SRC:.c=.i)
-	$(REMOVEDIR) .dep
+	$(REMOVEDIR) dep
 
 
 # Create object files directory
@@ -614,7 +623,7 @@ $(shell mkdir $(OBJDIR) 2>/dev/null)
 
 
 # Include the dependency files.
--include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
+-include $(shell mkdir dep 2>/dev/null) $(wildcard dep/*)
 
 
 # Listing of phony targets.
