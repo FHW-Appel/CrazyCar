@@ -441,11 +441,24 @@ sizeafter:
 
 
 
-# Display compiler version information.
+## Display compiler version information.
 gccversion : 
 	@$(CC) --version
 
+## Zeigt diese Hilfe an
+help: 
+	@awk ' \
+	  /^## / { desc = substr($$0, 4); next } \
+	  /^[a-zA-Z0-9_.%\/$$(){}-]+[ \t]*:([^=]|$$)/ && desc != "" { \
+	    i = index($$0, ":"); \
+	    target = substr($$0, 1, i - 1); \
+	    gsub(/[ \t]+$$/, "", target); \
+	    printf "\033[36m%-18s\033[0m %s\n", target, desc \
+	  } \
+	  { desc = "" } \
+	' $(MAKEFILE_LIST) | sort
 
+## Findet den seriellen Port des verbundenen Programmers
 find-serial-port:
 	@PORT="$(AVRDUDE_PORT)"; \
 	if [ -z "$$PORT" ]; then \
@@ -455,11 +468,13 @@ find-serial-port:
 	echo "Serieller Port gefunden: $$PORT"
 
 
-program: find-serial-port $(TARGET).hex $(TARGET).eep
+## Flasht den CrazyCar Atmega32
+program: find-serial-port $(TARGET).hex $(TARGET).eep 
 	@echo "Flashing AVR ..."
 	$(AVRDUDE) -P $(AVRDUDE_PORT) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
 
 
+## Brennt die Fuses auf den CrazyCar Atmega32
 fuses: find-serial-port
 	$(AVRDUDE) -c $(AVRDUDE_PROGRAMMER) -p $(MCU) -P $(AVRDUDE_PORT) $(AVRDUDE_BURN_FUSES)
 
@@ -627,8 +642,8 @@ $(shell mkdir $(OBJDIR) 2>/dev/null)
 
 
 # Listing of phony targets.
-.PHONY : all begin finish end sizebefore sizeafter gccversion \
-build elf hex eep lss sym coff extcoff \
+.PHONY : all begin finish end sizebefore sizeafter gccversion help \
+find-serial-port fuses build elf hex eep lss sym coff extcoff \
 clean clean_list program debug gdb-config
 
 
