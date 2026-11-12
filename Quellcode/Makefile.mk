@@ -445,6 +445,22 @@ sizeafter:
 gccversion : 
 	@$(CC) --version
 
+
+# 'help' recipe finds all
+# targets with a '## description'
+# comment directly above them 
+# It works by:
+# - awk reading the entire Makefile line by line
+# - Remember everything after '## ' as 'desc'
+# - Line right below looks like 'targetname:'
+#	and is not ':=' and 'desc' is set,
+#	print the target name in cyan with
+#	18 characters of padding to the right,
+#	then print the description.
+# - If this is not the case,
+#	forget 'desc' so the description only applies
+#	to the correct targets
+# 
 ## Zeigt diese Hilfe an
 help: 
 	@awk ' \
@@ -458,7 +474,7 @@ help:
 	  { desc = "" } \
 	' $(MAKEFILE_LIST) | sort
 
-## Findet den seriellen Port des verbundenen Programmers
+# Findet den seriellen Port des verbundenen Programmers
 find-serial-port:
 	@PORT="$(AVRDUDE_PORT)"; \
 	if [ -z "$$PORT" ]; then \
@@ -613,6 +629,7 @@ $(OBJDIR)/%.o : %.S
 
 
 # Target: clean project.
+## Löscht die durch das Makefile erstellten Dateien
 clean: begin clean_list end
 
 clean_list :
