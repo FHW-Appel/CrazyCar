@@ -1,6 +1,6 @@
 # Hey Emacs, this is a -*- makefile -*-
 #----------------------------------------------------------------------------
-# WinAVR Makefile Template written by Eric B. Weddington, J�rg Wunsch, et al.
+# WinAVR Makefile Template written by Eric B. Weddington, Jörg Wunsch, et al.
 #
 # Released to the Public Domain
 #
@@ -265,7 +265,7 @@ LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 # to get a full listing.
 #
 #AVRDUDE_PROGRAMMER = usbasp
-AVRDUDE_PROGRAMMER = stk500v1
+#AVRDUDE_PROGRAMMER = stk500v1
 
 # com1 = serial port. Use lpt1 to connect to parallel port.
 #AVRDUDE_PORT = usb
@@ -274,6 +274,7 @@ AVRDUDE_PROGRAMMER = stk500v1
 
 AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 #AVRDUDE_WRITE_EEPROM = -U eeprom:w:$(TARGET).eep
+AVRDUDE_BURN_FUSES = -U lfuse:w:0xE4:m -U hfuse:w:0xD9:m
 
 
 #C:\Programme\winavr\bin\avrdude.exe -p ATmega8 -e -c avr910
@@ -383,7 +384,7 @@ LST = $(SRC:%.c=$(OBJDIR)/%.lst) $(CPPSRC:%.cpp=$(OBJDIR)/%.lst) $(ASRC:%.S=$(OB
 
 
 # Compiler flags to generate dependency files.
-GENDEPFLAGS = -MMD -MP -MF .dep/$(@F).d
+GENDEPFLAGS = -MMD -MP -MF dep/$(@F).d
 
 
 # Combine all necessary flags and optional flags.
@@ -440,20 +441,59 @@ sizeafter:
 
 
 
-# Display compiler version information.
+## Display compiler version information.
 gccversion : 
 	@$(CC) --version
 
 
+# 'help' recipe finds all
+# targets with a '## description'
+# comment directly above them 
+# It works by:
+# - awk reading the entire Makefile line by line
+# - Remember everything after '## ' as 'desc'
+# - Line right below looks like 'targetname:'
+#	and is not ':=' and 'desc' is set,
+#	print the target name in cyan with
+#	18 characters of padding to the right,
+#	then print the description.
+# - If this is not the case,
+#	forget 'desc' so the description only applies
+#	to the correct targets
+# 
+## Zeigt diese Hilfe an
+help: 
+	@awk ' \
+	  /^## / { desc = substr($$0, 4); next } \
+	  /^[a-zA-Z0-9_.%\/$$(){}-]+[ \t]*:([^=]|$$)/ && desc != "" { \
+	    i = index($$0, ":"); \
+	    target = substr($$0, 1, i - 1); \
+	    gsub(/[ \t]+$$/, "", target); \
+	    printf "\033[36m%-18s\033[0m %s\n", target, desc \
+	  } \
+	  { desc = "" } \
+	' $(MAKEFILE_LIST) | sort
 
-program: $(TARGET).hex $(TARGET).eep
-	@echo "Flashing AVR ..."
-	@SERIAL_PORT=$$(../.vscode/find_serial_port.sh); \
-	if [ -z "$$SERIAL_PORT" ]; then \
+# Findet den seriellen Port des verbundenen Programmers
+find-serial-port:
+	@PORT="$(AVRDUDE_PORT)"; \
+	if [ -z "$$PORT" ]; then \
 		echo "Error: Es konnte kein serieller Port gefunden werden. Bitte prüfen Sie die Verbindung zu Ihrem Programmer."; \
 		exit 1; \
 	fi; \
-	$(AVRDUDE) -P $$SERIAL_PORT $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
+	echo "Serieller Port gefunden: $$PORT"
+
+
+## Flasht den CrazyCar Atmega32
+program: find-serial-port $(TARGET).hex $(TARGET).eep 
+	@echo "Flashing AVR ..."
+	$(AVRDUDE) -P $(AVRDUDE_PORT) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
+
+
+## Brennt die Fuses auf den CrazyCar Atmega32
+fuses: find-serial-port
+	$(AVRDUDE) -c $(AVRDUDE_PROGRAMMER) -p $(MCU) -P $(AVRDUDE_PORT) $(AVRDUDE_BURN_FUSES)
+
 
 # Generate avr-gdb config/init file which does the following:
 #     define the reset signal, load the target file, connect to target, and set 
@@ -589,6 +629,7 @@ $(OBJDIR)/%.o : %.S
 
 
 # Target: clean project.
+## Löscht die durch das Makefile erstellten Dateien
 clean: begin clean_list end
 
 clean_list :
@@ -606,7 +647,7 @@ clean_list :
 	$(REMOVE) $(SRC:.c=.s)
 	$(REMOVE) $(SRC:.c=.d)
 	$(REMOVE) $(SRC:.c=.i)
-	$(REMOVEDIR) .dep
+	$(REMOVEDIR) dep
 
 
 # Create object files directory
@@ -614,12 +655,12 @@ $(shell mkdir $(OBJDIR) 2>/dev/null)
 
 
 # Include the dependency files.
--include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
+-include $(shell mkdir dep 2>/dev/null) $(wildcard dep/*)
 
 
 # Listing of phony targets.
-.PHONY : all begin finish end sizebefore sizeafter gccversion \
-build elf hex eep lss sym coff extcoff \
+.PHONY : all begin finish end sizebefore sizeafter gccversion help \
+find-serial-port fuses build elf hex eep lss sym coff extcoff \
 clean clean_list program debug gdb-config
 
 
