@@ -448,31 +448,24 @@ gccversion :
 
 # 'help' recipe finds all
 # targets with a '## description'
-# comment directly above them 
-# It works by:
-# - awk reading the entire Makefile line by line
-# - Remember everything after '## ' as 'desc'
-# - Line right below looks like 'targetname:'
-#	and is not ':=' and 'desc' is set,
-#	print the target name in cyan with
-#	18 characters of padding to the right,
-#	then print the description.
-# - If this is not the case,
-#	forget 'desc' so the description only applies
-#	to the correct targets
+# comment directly above them
 # 
+ESC := $(shell printf '\033')
 ## Zeigt diese Hilfe an
-help: 
-	@awk ' \
-	  /^## / { desc = substr($$0, 4); next } \
-	  /^[a-zA-Z0-9_.%\/$$(){}-]+[ \t]*:([^=]|$$)/ && desc != "" { \
-	    i = index($$0, ":"); \
-	    target = substr($$0, 1, i - 1); \
-	    gsub(/[ \t]+$$/, "", target); \
-	    printf "\033[36m%-18s\033[0m %s\n", target, desc \
-	  } \
-	  { desc = "" } \
-	' $(MAKEFILE_LIST) | sort
+help:
+	@sed -n \
+	  -e '/^## /{' \
+	  -e 'N' \
+	  -e 's/^## \(.*\)\n\([a-zA-Z0-9_.%\/-][a-zA-Z0-9_.%\/-]*\)[ 	]*:\([^=].*\)\{0,1\}$$/\2|\1/' \
+	  -e 't format' \
+	  -e 'd' \
+	  -e ':format' \
+	  -e 's/^\([^|]*\)|/\1                  |/' \
+	  -e 's/^\(.\{18\}[^ |]*\) *|/\1 /' \
+	  -e 's/^\([^ ]*\)/$(ESC)[36m\1$(ESC)[0m/' \
+	  -e 'p' \
+	  -e '}' \
+	  $(MAKEFILE_LIST) | sort
 
 # Findet den seriellen Port des verbundenen Programmers
 find-serial-port:
